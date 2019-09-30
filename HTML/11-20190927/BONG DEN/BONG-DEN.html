@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BAI TAP BONG DEN</title>
+</head>
+<body style="background-color:black">
+    <div style="text-align: center; margin-top: 5cm">
+        <img id="imgname" src="./BONG_sang.gif"> <br>
+        <button onclick="bat_tat()" type="button" id="thaychu">Click here: Turn off</button>
+    </div>
+
+    <script>
+
+        function bat_tat() {var HinhAnh = document.getElementById('imgname');   
+if (HinhAnh.src.match("tat")) {HinhAnh.src = "./BONG_sang.gif"; document.getElementById("thaychu").innerHTML = "Click here: Turn off";}
+else {HinhAnh.src = "./BONG_tat.gif"; document.getElementById("thaychu").innerHTML = "Click here: Turn on";}}
+
+    </script>
+
+</body>
+</html>
