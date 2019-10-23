@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>In Du Lieu Tu API</title>
+    <style>
+    td,
+    th {
+        border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+    <button onclick="inDuLieu();">Click de in du lieu ra bang</button>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>name</th>
+            <th>email</th>
+            <th>password</th>
+            <th>createdAt</th>
+            <th>updatedAt</th>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <script>
+    
+    function inDuLieu(){
+        var http = new XMLHttpRequest();
+        http.onreadystatechange = function(){
+            if(http.readyState == 4 && http.status == 200){
+                var DuLieuBang = JSON.parse(http.responseText).users;
+                console.log(DuLieuBang)
+                var ArrayKey = Object.keys(DuLieuBang[0]);
+                console.log(ArrayKey);
+                for (var i = 0; i < DuLieuBang.length; i++) {
+                    var tableRow = document.createElement('tr');
+                    tableRow.setAttribute('id', 'tr-' + i);
+                    var tableBody = document.getElementById('table-body');
+                    tableBody.appendChild(tableRow);
+                    for (var j = 0; j < ArrayKey.length; j++) {
+                        console.log(DuLieuBang[i][ArrayKey[j]])
+                        var data = document.createElement('td');
+                        data.innerHTML = DuLieuBang[i][ArrayKey[j]];
+                        tableRow.appendChild(data)
+                    }
+                };
+                
+        }
+        }
+        http.open("GET", 'https://namcoi.com/aptech-demo/user-crud-laravel/public/api/users', true);
+        http.send();
+    }
+    </script>
+
+
+
+</body>
+</html>

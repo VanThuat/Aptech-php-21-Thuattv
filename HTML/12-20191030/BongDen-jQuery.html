@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>BAI TAP BONG DEN</title>
+</head>
+
+<body style="background-color:black">
+    <div style="text-align: center; margin-top: 5cm">
+        <img id="thayhinh" src="./BONG_sang.gif"> <br>
+        <button type="button" id="congtac">Click here: Turn off</button>
+    </div>
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
+    <script>
+    
+        $(document).ready(function () {
+            $('#congtac').click(function () {
+                var kiemtra = $('#thayhinh').attr('src');
+                if (kiemtra == "./BONG_sang.gif") {
+                    $('#thayhinh').attr({
+                        'src': "./BONG_tat.gif"
+                    })
+                } else {
+                    $('#thayhinh').attr({
+                        'src': "./BONG_sang.gif"
+                    })
+                }
+            })
+        })
+    
+    </script>
+</body>
+
+</html>
