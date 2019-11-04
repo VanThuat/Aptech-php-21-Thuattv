@@ -1,0 +1,1 @@
+<h1>Bai viet so {{ $number }}</h1>

@@ -19,8 +19,6 @@ $dbname = "05_php21_JOIN";
 // Kết nối database 05_php21_JOIN
 $connect = mysqli_connect($server, $username, $password, $dbname);
 
-
-
 $sql = "select * from users join roles on users.role_id = roles.id";
 $result = mysqli_query($connect, $sql);
 if (mysqli_num_rows($result) > 0) {

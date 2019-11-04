@@ -30,9 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     VALUES ('$email', '$pass', '$role_id')";
 
         if (mysqli_query($connect, $sql)) {
-            echo "Them data thành công vào DATABASE";
+            echo "";
         } else {
-            echo "Them data thất bại: " . mysqli_error($connect);
+            echo ""
         };
 ?>
 <form action="./baitap.php" method="POST">
