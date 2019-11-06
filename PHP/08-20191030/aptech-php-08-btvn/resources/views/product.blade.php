@@ -1,0 +1,3 @@
+{{dd($thongTinsanPham[$di])}}
+
+<?php

@@ -12,6 +12,6 @@ class userController extends Controller
         $bienUsers = DB::table('products')->get();
 
         //Truyen du lieu cho view co ten "list-users" voi tùy biến có dang ('key'=>'value')
-        return view('product', ['thongTin' => $bienUsers]);
+        return view('product', ['thongTinSanPham' => $bienUsers]);
     }
 }

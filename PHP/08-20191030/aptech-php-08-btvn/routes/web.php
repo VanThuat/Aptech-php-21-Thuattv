@@ -25,4 +25,7 @@
 // });
 
 // Tao lien ket tu CONTROLLER trong file http/controller
-route::get('lam-nhap/{id}', 'userController@hoTen');
+// route::get('lam-nhap/{id}', 'userController@hoTen');
+
+//Bai tap ve nha bai 8
+route::get('products/{id}', 'ProductController@hienThiSanPham');
