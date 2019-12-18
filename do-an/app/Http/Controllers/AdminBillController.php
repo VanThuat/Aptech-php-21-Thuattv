@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use App\User;
+use App\BillDetail;
 use App\Bill;
-
 class AdminBillController extends Controller
 {
     /**
@@ -81,9 +82,11 @@ class AdminBillController extends Controller
     public function destroy($id)
     {
         $bill = Bill::find($id);
-        $bill->delete();
+        \DB::table('bill_details')->where('bill_id',$id)->delete();
+		\DB::table('bills')->where('user_id',$id)->delete();
+		\DB::table('users')->where('id',$id)->delete();
         Session::flash('message', "Xóa đơn hàng thành công");
-
+        
         return Redirect::to('bill');
     }
 }
