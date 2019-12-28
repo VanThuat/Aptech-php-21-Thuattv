@@ -39,9 +39,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
     Category::insert([
-        'name' =>$_POST['name'],
+        'title' =>$_POST['title'],
         'slug' =>$_POST['slug'],
-        'description' =>$_POST['description']
+        'content' =>$_POST['content']
     ]);
     $categories = Category::get();
     return view('admin/categories.index', ['categories'=>$categories]);
@@ -79,9 +79,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $category->name = $request->name;
+        $category->title = $request->title;
         $category->slug = $request->slug;
-        $category->description = $request->description;
+        $category->content = $request->content;
         $category->save();
         return redirect()->route('categories.index');
     }

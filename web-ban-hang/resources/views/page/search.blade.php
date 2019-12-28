@@ -7,9 +7,9 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="beta-products-list">
-							<h4>Tìm kiếm</h4>
+							<h4>Kết quả tìm kiếm</h4>
 							<div class="beta-products-details">
-								<p class="pull-left">Tìm thấy {{$product->total()}} sản phẩm</p>
+								<p class="pull-left">Tìm thấy {{count($product)}} sản phẩm</p>
 								<div class="clearfix"></div>
 							</div>
 
@@ -43,12 +43,11 @@
 								</div>
 								@endforeach
 							</div>
-							<div class="row">{{$product->links()}}</div>
-						</div> 
+						</div> <!-- .beta-products-list -->
 						<div class="space50">&nbsp;</div>
 					</div>
-				</div>
-			</div> 
-		</div> 
-    </div> 
+				</div> <!-- end section with sidebar and main content -->
+			</div> <!-- .main-content -->
+		</div> <!-- #content -->
+    </div> <!-- .container -->
 @endsection

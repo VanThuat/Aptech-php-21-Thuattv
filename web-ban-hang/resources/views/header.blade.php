@@ -31,7 +31,7 @@
 					<div class="space10">&nbsp;</div>
 					<div class="beta-comp">
 						<form role="search" method="GET" id="searchform" action="{{route('tim-kiem')}}">
-							<input type="text" name="key_search" id="key_search" placeholder="Nhập từ khóa..." />
+							<input type="text" name="key_search" id="searchform" placeholder="Nhập từ khóa..." />
 							<button class="fas fa-search" type="submit" id="searchsubmit"></button>
 						</form>
 					</div>

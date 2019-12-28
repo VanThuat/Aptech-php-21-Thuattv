@@ -21,11 +21,19 @@ class PageController extends Controller
     public function getIndex()
     {
     $slide=Slide::all();
+    //$new_product=Product::where('new',1)->get();
+    // Neu chi lay ra thi nhu dong tren cung duoc
+    //Con neu muon phan trang thi nhu dong duoi [paginate(8), 8 la so san pham tren 1 trang
+
     $new_product=Product::where('new',1)->paginate(8);
+    //dieu kien loc: lay nhung sp o cot new co gia tri bang 1, roi lay all
     
     $sanpham_khuyenmai=Product::where('promotion_price','<>',0)->paginate(8,['*'],'pag');
+    //Dieu kien loc promotion_price co gia tri khac 0
 
-    return view('page.trangchu',compact('slide','new_product','sanpham_khuyenmai'));
+    //return view('page.trangchu',['slide'=>'@slide']);//day la cach truyen mang
+
+    return view('page.trangchu',compact('slide','new_product','sanpham_khuyenmai')); //truyen vao bien slide
     }
 
     public function getLoaiSp($type)
@@ -71,10 +79,10 @@ class PageController extends Controller
         
         $this->validate($request,
             [
-                'email'=>'required|email|unique:users,email', 
-                'password'=>'required|min:6|max:20',
-                'fullname'=>'required|',
-                'repassword'=>'required|same:password'
+                'email'=>'required|email|unique:users,email', //dieu kien nhap dinh dang email, va 1 email chi duoc su dung cho 1 nguoi
+                'password'=>'required|min:6|max:20', //yeu cau nguoi dung nhap pass, so ky tu tu 6-20
+                'fullname'=>'required|', //khong duoc de trong truong ten
+                'repassword'=>'required|same:password'//yeu cau nhap pass, va giong voi pass tren
             ],
             [
                 'email.required'=>'Vui lòng nhập email',
@@ -89,7 +97,7 @@ class PageController extends Controller
         $user = new User();
         $user->full_name=$request->fullname;
         $user->email=$request->email;
-        $user->password=Hash::make($request->password);
+        $user->password=Hash::make($request->password);//Ma hoa mat khau, de su dung ham Hash can use o tren
         $user->phone=$request->phone;
         $user->address=$request->address;
         $user->save();
@@ -109,7 +117,7 @@ class PageController extends Controller
             'password.min'=>'Mật khẩu không đúng',
             'password.max'=>'Mật khẩu không đúng',
         ]);
-        $xacNhan = array('email'=>$request->email,'password'=>$request->password);
+        $xacNhan = array('email'=>$request->email,'password'=>$request->password);//$request->email la email nguoi dung nhap
         if(Auth::attempt($xacNhan)){
             return redirect()->back()->with(['flag'=>'success','msg'=>'Đăng nhập thành công']);
         }else {
@@ -123,7 +131,7 @@ class PageController extends Controller
     }
 
     public function getSearch(Request $request){
-        $product = Product::where('name','like','%'.$request->key_search.'%')
+        $product = Product::where('name','like','%'.$request->key_search.'%')// dung like % (neu like khong thi no yeu cau nhap chinh xac moi tim ra) de nhap gan dung van tim ra, dung toan tu noi chuoi.
                             ->orWhere('unit_price',$request->key_search)
                             ->get();
     

@@ -37,6 +37,7 @@
 								<div class="col-sm-4 mb10">
 									<div class="single-item">
 										@if($sp->promotion_price!=0)
+										<!-- neu gia khuyen mai khac 0 thi hien thi chu sale tren dau hinh -->
 										<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
 										@endif
 										<div class="single-item-header">

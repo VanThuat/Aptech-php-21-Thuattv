@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Bill Management</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
-    </head>
-    <body>
-        <div class="container">
+@extends('admin.adminmaster')
+@section('content')
+<div class="container">
             <div class="row">
                 <div class="col-2">
-                    @include('sidebar-admin')
                 </div>
                 <div class="col-10">
-                    <section class="content-header">
-                        <h3 class="breadcrumb">
+                    <div class="content-header">
+                        <h3 class=" text-center">
                             Danh sách đơn hàng
                         </h3>
-                    </section>
+                    </div>
                     <!-- Main content -->
                     <section class="content">
                         @if (Session::has('message'))
@@ -38,7 +29,7 @@
                                                     <th>Email</th>
                                                     <th class="sorting">Ngày đặt hàng</th>
                                                     <th>Trạng thái</th>
-                                                    <th class="sorting">Chi tiết</th>
+                                                    <th class="sorting">Vào xem</th>
                                                     <th class="sorting">Xóa</th>
                                                 </tr>
                                             </thead>
@@ -50,7 +41,11 @@
                                                     <td>{{ $customer->address }}</td>
                                                     <td>{{ $customer->email }}</td>
                                                     <td>{{ $customer->created_at }}</td>
-                                                    <td>Chưa xử lý</td>
+                                                    <td>
+                                                        @if(1) Chưa xuất hàng
+                                                        @else Đã xuất Hàng
+                                                        @endif
+                                                    </td>
                                                     <td><a href="{{ url('bill')}}/{{ $customer->id }}/edit">Chi tiết</a></td>
                                                     <td>
                                                         <form action="{{ url('bill')}}/{{ $customer->id }}" method="post">
@@ -71,5 +66,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+@endsection

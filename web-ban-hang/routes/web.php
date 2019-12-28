@@ -49,6 +49,7 @@ Route::get('tim-kiem','PageController@getSearch')->name('tim-kiem');
 
 //Phan gio hang
 Route::resource('cart', 'CartController');
+//Quan ly gio hang
 //them vao gio
 Route::get('addcart/{id}','CartController@addcart')->name('them-vao-gio');
 //xem gio hang

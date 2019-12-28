@@ -23,27 +23,32 @@ class CartController extends Controller
         
         $product=Product::select('id','name','unit_price','promotion_price','image') -> find($id);
         
+        //Neu khong ton tai san pham se tra ve trang chu
         if(!$product) return redirect ('/');
 
+        //neu ton tai se add cac thong tin sau
         if($product->promotion_price>0){
         $price = $product->promotion_price;
         } else {
         $price = $product->unit_price;
         }
+
         Cart::add([
         'id'=>$id,
         'name'=>$product->name,
         'qty'=>1,
         'price'=>$price,
-        'options'=>['image'=>$product->image], 
+        'options'=>['image'=>$product->image], //Voi cung mot san pham nhung co nhieu hinh khac nhau
         ]);
-
+        //khi hoan thanh se tra ve nhu ban dau (truoc khi click)
         return redirect()->back();
 
         
     }
 
-    
+    /**
+     * Danh sach gio hang
+     */
     public function showCart(){
         $carts=Cart::content();
         return view('Cart.showCart',['carts'=>$carts]);
@@ -58,24 +63,28 @@ class CartController extends Controller
 
     }
 
+    //xoa mot san pham
     public function removecart ($rowId)
     {
         cart::remove($rowId);
         return redirect('/showcart');
     }
 
+    // Xoa toan bo san pham
     public function formatcart()
     {
         Cart::destroy();
         return redirect()->back();
     }
 
+    //Thanh toan gio hang
     public function formPay()
     {
         $carts=Cart::content();
         return view('cart.cartPay',['carts'=>$carts]) ;
     }
         
+    //Luu vao database
     public function store(Request $request)
     {   
         $carts=\Cart::content();
@@ -96,6 +105,7 @@ class CartController extends Controller
         $bill->save();
         
 
+        //vi co the co nhieu gio hang nen su dung vong lap
         foreach($carts as $cart) {
             $billDetail = new billDetail;
             $billDetail->id_bill = $bill->id;

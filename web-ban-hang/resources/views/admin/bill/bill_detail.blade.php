@@ -1,29 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bill Management</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
-</head>
-<body>
+@extends('admin.adminMaster')
+@section('content')
 <div class="container">
     <div class="row">
     <div class="col-2">
-    @include('sidebar-admin')
     </div>
     <div class="col-10">
-        <section class="content-header">
-            <h1>
-                Chi tiết đơn hàng
-            </h1>
-            <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{asset('bill')}}" title="Danh sách đơn">Danh sách đơn hàng</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Chi tiết đơn hàng</li>
-            </ol>
-        </section>
+        <div>
+            <h2 class="text-center">Chi tiết đơn hàng</h2>
+        </div>
+        <hr>
         <!-- Main content -->
         <section class="content">
             <!-- Default box -->
@@ -47,7 +32,7 @@
                                     </tr>
                                     <tr>
                                         <td>Ngày đặt hàng</td>
-                                        <td>{{ $customerInfo->created_at }}</td>
+                                        <td>{{ $customerInfo->bill_date }}</td>
                                     </tr>
                                     <tr>
                                         <td>Số điện thoại</td>
@@ -73,6 +58,7 @@
                                 <tr role="row">
                                     <th>STT</th>
                                     <th>Tên sản phẩm</th>
+                                    <th>Loại sản phẩm</th>
                                     <th>Số lượng</th>
                                     <th>Giá tiền</th>
                                 </thead>
@@ -81,12 +67,13 @@
                                     <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $bill->product_name }}</td>
-                                        <td>{{ $bill->quantity }}</td>
-                                        <td>{{ number_format($bill->unit_price) }}.000 <u>đ</u></td>
+                                        <td>{{ $bill->type_product }}</td>
+                                        <td>{{ $bill->qty }}</td>
+                                        <td>{{ number_format($bill->price,0,",",".") }} <u>đ</u></td>
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td class=" text-center" colspan="3"><b>Tổng tiền</b></td>
+                                    <td class=" text-right" colspan="4"><b>Tổng tiền</b></td>
                                     <td colspan="1"><b class="text-red">{{ $bill->total }}0 <u>đ</u></b></td>
                                 </tr>
                                 </tbody>
@@ -119,9 +106,4 @@
         </section>
     </div>
 </div>
-
-</div>
-
-
-</body>
-</html>
+@endsection

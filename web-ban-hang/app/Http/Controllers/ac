@@ -19,12 +19,13 @@ class AdminBillController extends Controller
      */
     public function index()
     {
-
-        $customers = DB::table('customer')
-                    ->orderBy('id', 'desc')
-                    ->get();
-
-            return view('admin/bill.bill_list', compact('customers'));
+            $bill_list = DB::table('bill_detail')
+                            ->join('bills','bill_detail.id_bill','=','bills.id')
+                            ->leftjoin('customer','bills.id_customer','=','customer.id')
+                            ->select('customer.*', 'bills.*')
+                            ->get();
+            
+            return view('admin/bill.bill_list', compact('bill_list'));
     }
 
     /**
@@ -85,7 +86,7 @@ class AdminBillController extends Controller
         $bill = DB::table('bill_detail')->join('bills','bill_detail.id_bill','=','bills.id')
                                         ->leftjoin('customer','bills.id_customer','=','customer.id')
                                         ->where('bills.id_customer', $id)->delete();
-        
+        //$id la id nhan duoc khi thuc hien xoa, id nay nam ben form cuar view. de xoa du lieu bang nao thi ket noi toi bang do,(o day la bill_detail). ta thuc hien moi quan he lien ket. join la quan he truc tiep, con lefjoin la quan he bac cau. tuc o day bill_detail quan he truc tiep voi bills va quan he voi customer thong qua bill, 
         Session::flash('message', "Xóa đơn hàng thành công");
         
         return Redirect::to('bill');
